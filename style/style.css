@@ -61,3 +61,22 @@ body {
     font-size: 1.2rem;
     cursor: pointer;
 }
+
+.scores {
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.scores div {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.scores span {
+    font-size: 1.6rem;
+    font-weight: bold;
+}

@@ -2,12 +2,14 @@ let board = document.querySelector('.board');
 let cells = document.querySelectorAll(".cell");
 let reset = document.querySelector("#reset");
 let winnerDiv = document.querySelector(".winner");
+let playerxScoreSpan = document.querySelector(".xScore");
+let playeroScoreSpan = document.querySelector(".oScore");
 cells = Array.from(cells);
 
 let currentPlayer = "X";
 let winner = "";
 let playerxScore = 0;
-let playeroScroe = 0;
+let playeroScore = 0;
 let winConditions = [
     [
         0, 1, 2
@@ -33,6 +35,9 @@ let winConditions = [
     [2, 4, 6]
 ];
 
+playerxScoreSpan.innerText = playerxScore;
+playeroScoreSpan.innerText = playeroScore;
+
 function checkWinner() {
     for (let i = 0; i < winConditions.length; i++) {
         if (cells[winConditions[i][0]].innerText != "" && cells[winConditions[i][0]].innerText === cells[winConditions[i][1]].innerText && cells[winConditions[i][1]].innerText === cells[winConditions[i][2]].innerText) {
@@ -40,6 +45,10 @@ function checkWinner() {
             highlightCells([winConditions[i][0], winConditions[i][1], winConditions[i][2]
             ]);
             winnerDiv.innerText = `Player ${currentPlayer} Won`
+
+            currentPlayer == "X" ? playerxScore += 1 : playeroScore += 1;
+            playerxScoreSpan.innerText = playerxScore;
+            playeroScoreSpan.innerText = playeroScore;
         }
     }
 };
