@@ -9,8 +9,8 @@ cells = Array.from(cells);
 
 let currentPlayer = "X";
 let winner = "";
-let playerxScore = 0;
-let playeroScore = 0;
+let playerxScore = JSON.parse(localStorage.getItem("playerxScore")) || 0;
+let playeroScore = JSON.parse(localStorage.getItem("playeroScore")) || 0;
 let winConditions = [
     [
         0, 1, 2
@@ -48,26 +48,29 @@ function checkWinner() {
             winner = currentPlayer;
             highlightCells([winConditions[i][0], winConditions[i][1], winConditions[i][2]
             ]);
-            winnerDiv.innerText = `Player ${currentPlayer} Won`
+            winnerDiv.innerText = `Player ${currentPlayer} Won`;
 
-            currentPlayer == "X"
+            currentPlayer === "X"
                 ? playerxScore += 1
                 : playeroScore += 1;
             playerxScoreSpan.innerText = playerxScore;
             playeroScoreSpan.innerText = playeroScore;
+
+            localStorage.setItem("playerxScore", playerxScore);
+            localStorage.setItem("playeroScore", playeroScore);
             return;
-        }
-    }
+        };
+    };
 
     for (let i = 0; i < cells.length; i++) {
         if (cells[i].innerText === "") {
             isDraw = false;
             break;
-        }
-    }
+        };
+    };
 
     if (isDraw) {
-        winnerDiv.innerText = "It's a Draw"
+        winnerDiv.innerText = "It's a Draw";
     }
 };
 
@@ -95,19 +98,22 @@ function resetGame() {
     addClickEvent();
     winner = "";
     winnerDiv.innerText = "";
-}
+};
 
 resetGameBtn.addEventListener("click", resetGame);
 
 resetScore.addEventListener("click", function () {
-    playerxScore = 0;
-    playeroScore = 0;
+    playerxScore = 0
+    playeroScore = 0
 
-    playerxScoreSpan.innerText = playerxScore;
-    playeroScoreSpan.innerText = playeroScore;
+    playerxScoreSpan.innerText = playerxScore
+    playeroScoreSpan.innerText = playeroScore
 
     resetGame()
-})
+
+    localStorage.setItem("playerxScore", playerxScore);
+    localStorage.setItem("playeroScore", playeroScore);
+});
 
 function addClickEvent() {
     cells
@@ -125,6 +131,6 @@ function addClickEvent() {
                         : "X";
                 });
         });
-}
+};
 
 addClickEvent();
