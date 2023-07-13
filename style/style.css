@@ -54,11 +54,17 @@ body {
     font-size: 1.5rem;
 }
 
-#reset {
+.buttons {
+    display: flex;
+    gap: 20px;
+}
+
+#resetGame, #resetScore {
     padding: 8px 20px;
     border: 3px solid black;
     background-color: transparent;
     font-size: 1.2rem;
+    font-weight: 500;
     cursor: pointer;
 }
 

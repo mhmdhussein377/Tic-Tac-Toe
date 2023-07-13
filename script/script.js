@@ -1,6 +1,7 @@
 let board = document.querySelector('.board');
 let cells = document.querySelectorAll(".cell");
-let reset = document.querySelector("#reset");
+let resetGame = document.querySelector("#resetGame");
+let resetScore = document.querySelector("#resetScore");
 let winnerDiv = document.querySelector(".winner");
 let playerxScoreSpan = document.querySelector(".xScore");
 let playeroScoreSpan = document.querySelector(".oScore");
@@ -61,7 +62,7 @@ function highlightCells(combination) {
     }
 }
 
-reset
+resetGame
     .addEventListener("click", function () {
         board.innerHTML = `<div class="cell"></div>
         <div class="cell"></div>
@@ -79,6 +80,11 @@ reset
         winner = "";
         winnerDiv.innerText = "";
     });
+
+resetScore.addEventListener("click", function() {
+    playerxScore = 0;
+    playeroScore = 0;
+})
 
 function addClickEvent() {
     cells
