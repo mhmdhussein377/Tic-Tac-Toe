@@ -1,8 +1,13 @@
+let board = document.querySelector('.board');
 let cells = document.querySelectorAll(".cell");
+let reset = document.querySelector("#reset");
+let winnerDiv = document.querySelector(".winner");
 cells = Array.from(cells);
 
 let currentPlayer = "X";
 let winner = "";
+let playerxScore = 0;
+let playeroScroe = 0;
 let winConditions = [
     [
         0, 1, 2
@@ -34,6 +39,7 @@ function checkWinner() {
             winner = currentPlayer;
             highlightCells([winConditions[i][0], winConditions[i][1], winConditions[i][2]
             ]);
+            winnerDiv.innerText = `Player ${currentPlayer} Won`
         }
     }
 };
@@ -46,16 +52,39 @@ function highlightCells(combination) {
     }
 }
 
-cells
-    .forEach(function (cell) {
-        cell
-            .addEventListener('click', function () {
-                if (cell.innerText.trim() != "") 
-                    return;
-                cell.innerText = currentPlayer;
-                checkWinner();
-                currentPlayer = currentPlayer == "X"
-                    ? "O"
-                    : "X";
-            })
-    })
+reset
+    .addEventListener("click", function () {
+        board.innerHTML = `<div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>`;
+
+        cells = document.querySelectorAll(".cell");
+        cells = Array.from(cells);
+        addClickEvent();
+        winner = "";
+        winnerDiv.innerText = "";
+    });
+
+function addClickEvent() {
+    cells
+        .forEach(function (cell) {
+            cell
+                .addEventListener("click", function () {
+                    if (cell.innerText.trim() != "") 
+                        return;
+                    cell.innerText = currentPlayer;
+                    checkWinner();
+                    currentPlayer = currentPlayer == "X"
+                        ? "O"
+                        : "X";
+                });
+        });
+}
+
+addClickEvent();
