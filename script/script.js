@@ -32,9 +32,19 @@ function checkWinner() {
     for (let i = 0; i < winConditions.length; i++) {
         if (cells[winConditions[i][0]].innerText != "" && cells[winConditions[i][0]].innerText === cells[winConditions[i][1]].innerText && cells[winConditions[i][1]].innerText === cells[winConditions[i][2]].innerText) {
             winner = currentPlayer;
+            highlightCells([winConditions[i][0], winConditions[i][1], winConditions[i][2]
+            ]);
         }
     }
 };
+
+function highlightCells(combination) {
+    for (let i = 0; i < combination.length; i++) {
+        cells[combination[i]]
+            .classList
+            .add("highlight");
+    }
+}
 
 cells
     .forEach(function (cell) {
