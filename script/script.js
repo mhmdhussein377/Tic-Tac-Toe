@@ -1,17 +1,17 @@
-let board = document.querySelector('.board');
-let cells = document.querySelectorAll(".cell");
-let resetGameBtn = document.querySelector("#resetGame");
-let resetScore = document.querySelector("#resetScore");
-let winnerDiv = document.querySelector(".winner");
-let playerxScoreSpan = document.querySelector(".xScore");
-let playeroScoreSpan = document.querySelector(".oScore");
+const board = document.querySelector('.board');
+const cells = document.querySelectorAll(".cell");
+const resetGameBtn = document.querySelector("#resetGame");
+const resetScore = document.querySelector("#resetScore");
+const winnerDiv = document.querySelector(".winner");
+const playerxScoreSpan = document.querySelector(".xScore");
+const playeroScoreSpan = document.querySelector(".oScore");
 cells = Array.from(cells);
 
 let currentPlayer = "X";
 let winner = "";
 let playerxScore = JSON.parse(localStorage.getItem("playerxScore")) || 0;
 let playeroScore = JSON.parse(localStorage.getItem("playeroScore")) || 0;
-let winConditions = [
+const winConditions = [
     [
         0, 1, 2
     ],
@@ -44,12 +44,17 @@ function checkWinner() {
     let isDraw = true;
 
     for (let i = 0; i < winConditions.length; i++) {
-        if (cells[winConditions[i][0]].innerText != "" && cells[winConditions[i][0]].innerText === cells[winConditions[i][1]].innerText && cells[winConditions[i][1]].innerText === cells[winConditions[i][2]].innerText) {
+        let cellOneIndex = winConditions[i][0];
+        let cellTwoIndex = winConditions[i][1];
+        let cellThreeIndex = winConditions[i][2];
+        // checking for a win condition
+        if (cells[cellOneIndex].innerText != "" && cells[cellOneIndex].innerText === cells[cellTwoIndex].innerText && cells[cellOneIndex].innerText === cells[cellThreeIndex].innerText) {
             winner = currentPlayer;
-            highlightCells([winConditions[i][0], winConditions[i][1], winConditions[i][2]
+            highlightCells([cellOneIndex, cellTwoIndex, cellThreeIndex
             ]);
             winnerDiv.innerText = `Player ${currentPlayer} Won`;
 
+            // incrementing the score of the winner
             currentPlayer === "X"
                 ? playerxScore += 1
                 : playeroScore += 1;
