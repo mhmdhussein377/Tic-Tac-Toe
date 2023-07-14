@@ -1,5 +1,5 @@
 const board = document.querySelector('.board');
-const cells = document.querySelectorAll(".cell");
+let cells = document.querySelectorAll(".cell");
 const resetGameBtn = document.querySelector("#resetGame");
 const resetScore = document.querySelector("#resetScore");
 const winnerDiv = document.querySelector(".winner");
